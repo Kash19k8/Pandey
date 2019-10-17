@@ -1,5 +1,6 @@
 Hi Aakash
 wassup new world!!
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 How's everything
 =======
@@ -7,3 +8,7 @@ How's everything
 Very cold here !
 Thats all for today !
 >>>>>>> Stashed changes
+=======
+How's everything
+Very cold here !
+>>>>>>> 80daaf8d673002219a1b5aca3331db591dd2dd35
