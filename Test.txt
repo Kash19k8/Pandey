@@ -1,13 +1,57 @@
-Hi Aakash
-wassup new world!!
+// Posting to mongo db 
 
-How's everything
-======
-How's everything
-Very cold here !
-Thats all for today !
+var express = require("express");
+var app = express();
+var port = 3000;
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-===
-How's everything
-Very cold here !
+var mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
+mongoose.connect("mongodb://localhost/KASH");
+var nameSchema = new mongoose.Schema({
+    itemName: String,
+
+});
+var User = mongoose.model("Pan", nameSchema);
+
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + "/index.html");
+});
+
+app.post("/addname", (req, res) => {
+    var myData = new User(req.body);
+    myData.save()
+        .then(item => {
+            res.send("Name saved to database");
+        })
+        .catch(err => {
+            res.status(400).send("Unable to save to database");
+        });
+});
+
+app.listen(port, () => {
+    console.log("Server listening on port " + port);
+});
+
+// Html continuation
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Inventory</title>
+</head>
+
+<body>
+    <h1>Add item name</h1>
+    <form method="post" action="/addname">
+        <label>ItemName</label><br>
+        <input type="text" name="itemName" placeholder="Enter item name..." required>
+        <input type="submit" value="Add Name">
+    </form>
+</body>
+
+</html>
 
